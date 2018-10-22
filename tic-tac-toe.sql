@@ -32,7 +32,7 @@ CREATE TABLE `games` (
   `autoID` int(11) NOT NULL,
   `p1` int(11) DEFAULT NULL,
   `p2` int(11) DEFAULT NULL,
-  `gameState` tinyint(1) DEFAULT NULL
+  `gameState` tinyint(1) DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
