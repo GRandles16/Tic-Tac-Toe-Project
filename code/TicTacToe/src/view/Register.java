@@ -51,7 +51,7 @@ public class Register extends JFrame {
         lblUsername.setBounds(12, 50, 143, 26);
         contentPane.add(lblUsername);
 
-        username = new JTextField("Uname");
+        username = new JTextField();
         username.setBounds(12, 80, 298, 35);
         contentPane.add(username);
         username.setColumns(10);
@@ -61,7 +61,7 @@ public class Register extends JFrame {
         lblFirstName.setBounds(12, 130, 143, 26);
         contentPane.add(lblFirstName);
 
-        firstName = new JTextField("FName");
+        firstName = new JTextField();
         firstName.setBounds(12, 160, 298, 35);
         contentPane.add(firstName);
         firstName.setColumns(10);
@@ -71,7 +71,7 @@ public class Register extends JFrame {
         lblSurame.setBounds(12, 210, 143, 26);
         contentPane.add(lblSurame);
         
-        surname = new JTextField("Surname");
+        surname = new JTextField();
         surname.setBounds(12, 240, 298, 35);
         contentPane.add(surname);
         surname.setColumns(10);

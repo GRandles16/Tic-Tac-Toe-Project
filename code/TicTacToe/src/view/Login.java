@@ -89,7 +89,6 @@ public class Login extends JFrame {
                 try {
                     Connection con = new Connection();
                     proxy = con.getProxy();
-                    JOptionPane.showMessageDialog(null,"Here1");
                     int i = proxy.login(user.getText(), pass.getText());
                     switch(i) {
                         case -1:
@@ -99,7 +98,7 @@ public class Login extends JFrame {
                             JOptionPane.showMessageDialog(null,"Incorrect Login details");
                             break;
                         default:
-                            
+                            JOptionPane.showMessageDialog(null,"Login Successfull");
                             break;
                     }
                 }catch(Exception e){
