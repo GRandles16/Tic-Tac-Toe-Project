@@ -16,7 +16,8 @@ try {
     $uId = $response->return;
     echo $uId;
     if($uId > 0)
-        echo "it works";
+            $_SESSION['userId'] = $uId;
+        header("Location: LoginPage.php");
     } 
 catch (Exception $e) 
     {

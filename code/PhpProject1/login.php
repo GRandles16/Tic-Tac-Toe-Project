@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
   $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
   $client = new SoapClient($wsdl, array('trace'=>1));
   
@@ -15,7 +20,8 @@ try {
     echo $uId;
     if($uId > 0){
     header("Location: mainMenuPage.php");
-die();   
+    $_SESSION['userId'] = $uId;
+    die();   
     return;
     }
     else

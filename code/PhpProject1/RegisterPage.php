@@ -16,9 +16,15 @@
                 <tr><td>Name:   </td><td><input type="text" name="name"></td></tr>
                 <tr><td>Surname:  </td><td><input type="text" name="surname"></td></tr>
 
-                <tr><td><input class = "button" type="submit" name="submit" value="register"></td></tr>
+                <tr><td><input class = "button" onclick="myFunction()" type="submit" name="submit" value="register"></td></tr>
 
             </table> 
         </form> 
+<script>
+function myFunction()
+{
+alert("You have Sucessfully Registered, Please Login to continue");
+}
+</script>
     </body>
 </html>

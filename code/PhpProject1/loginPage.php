@@ -8,7 +8,7 @@
         <form action="login.php" method="post">
             <table class = "box" style = "border: solid black 1px; background-color: skyblue; margin-left: 20px; margin-left: 20px;">
                 <tr>
-                    <td><h1 style="color: red;">Login Page</h3></td>
+                    <td><h1 style="color: red;">Login Page</h1></td>
                     <td></td>
                 </tr>
                 <tr><td>Username:  </td><td><input type="text" name="username"></td></tr>
