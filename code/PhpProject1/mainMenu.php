@@ -10,36 +10,52 @@ if(!isset($_SESSION))
 { 
     session_start(); 
 } 
-
-//$userId = $_POST[$_SESSION['userId']];
-$xml_array['uId'] = $_SESSION['userId'];
-
+$uId = $_SESSION['userId'];
 
 if($_REQUEST['New-Game']=="newGame")
 {
     try{
-  // echo $_SESSION[$uId];
-  // $uId = $_SESSION['userId'];
- //  echo $uId;
-           
-//$uId = $_POST['userId'];
 
-   // $params = array('newGame'=>$xml_array);
-   print_r ($xml_array);
-    
-    $response = $client->newGame($xml_array);
-    $GId = $response->return;
-    echo $GId;
+
+        $params = array('uid'=>$uId);
+
+         $response = $client->newGame($params);
+         $GId = $response->return;
+
+
+         $_SESSION['gameId'] = $GId;
+         header("Location: mainMenuPage.php");
+         
     }catch (Exception $e) {
         echo "<h2>Exception Error!</h2>";
-    echo $e->getMessage();}
+        echo $e->getMessage();}
 }
 else if($_REQUEST['League-Table']=="leagueTable")
 {
-echo "You pressed Button 2";
+    try{
+
+         $response = $client->leagueTable();
+         $GId = $response->return;
+         print_r($GId);
+         
+    }catch (Exception $e) {
+        echo "<h2>Exception Error!</h2>";
+        echo $e->getMessage();}
 
 }
-else if($_REQUEST['Show-All-Games']=="showAllMyGames")
+else if($_REQUEST['Show-My-Open-Games']=="showMyOpenGames")
 {
-echo "You pressed Button 3";
+        try{
+        $uId = $_SESSION['userId'];
+        $params = array('uid'=>$uId);
+         $response = $client->showMyOpenGames($params);
+        
+         
+         $GId = $response->return;
+         $_SESSION['data'] = $GId;
+         header("Location: showMyOpenGames.php");
+     
+    }catch (Exception $e) {
+        echo "<h2>Exception Error!</h2>";
+        echo $e->getMessage();}
 }
