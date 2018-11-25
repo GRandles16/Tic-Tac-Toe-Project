@@ -20,11 +20,11 @@
 
             </table> 
         </form> 
-<script>
-function myFunction()
-{
-alert("You have Sucessfully Registered, Please Login to continue");
-}
-</script>
+        <script>
+            function myFunction()
+            {
+                alert("You have Sucessfully Registered, Please Login to continue");
+            }
+        </script>
     </body>
 </html>

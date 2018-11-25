@@ -1,84 +1,89 @@
 <?php
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 ?>
-<?php 
+<?php
 $uId = $_SESSION['userId'];
-    $s_array = explode(",", $_POST['data']);
+$s_array = explode(",", $_POST['data']);
 
-$spaces=array(); //to store space
-$splitString=array();
-foreach($s_array as $word)
-{
-    if($word)
-    {
-        array_push($splitString,$word);
+$spaces = array(); //to store space
+$splitString = array();
+foreach ($s_array as $word) {
+    if ($word) {
+        array_push($splitString, $word);
     }
 }
 
-$count=count($splitString);
+$count = count($splitString);
 
-for($i=0;$i<$count;$i++)
-{
-    for($j=0;$j<$count;$j++)
-    {
-        $result[$i][$j+1] = $splitString[$i];
-
+for ($i = 0; $i < $count; $i++) {
+    for ($j = 0; $j < $count; $j++) {
+        $result[$i][$j + 1] = $splitString[$i];
     }
 }
-    print_r($splitString[0]);
-    print_r($splitString[1]);
-    
-  $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-  $client = new SoapClient($wsdl, array('trace'=>1));
+//print_r($splitString[0]);
+//print_r($splitString[1]);
 
-$params = array( 'uid' => $uId,'gid' => $splitString[0]);
+$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
+$client = new SoapClient($wsdl, array('trace' => 1));
+
+$params = array('uid' => $uId, 'gid' => $splitString[0]);
 
 try {
     $response = $client->joinGame($params);
     $result = $response->return;
-    echo $result;
-
-    } 
-catch (Exception $e) 
-    {
-        echo "<h2>Exception Error!</h2>";
-        echo $e->getMessage();
+    // $result;
+} catch (Exception $e) {
+    echo "<h2>Exception Error!</h2>";
+    echo $e->getMessage();
+}
+?>
+<?php
+if($result == 1)
+{
+    echo "<script>";
+    echo"alert('You have sucessfully joined the game, good luck!');";
+    echo "</script>";
+}
+else{
+    echo "<script>";
+    echo "alert('You have unsucessfully joined the game');";
+    echo "</script>";
     }
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" media="all" href="style.css"> 
+        <script type="text/javascript" src="js/script.js"></script>
     </head>
     <body>
-        <form action="mainMenu.php" method="post">
-            <table class = "box" style = "border: solid black 1px; background-color: skyblue; margin-left: 20px; margin-left: 20px;">
-                <tr>
-                    <td><h1 style="color: red;">Main Game</h3></td>
-            
-                    <td></td>
-
-                </tr>
-
-                <tr>
-                    <!-- <?php echo $_POST['data'] ?> -->
-                             
-                        
-                        
-                    </td>
-                </tr>
-
-            </table> 
-        </form> 
+        <div id="container">
+        <header>
+            <h1> Tic Tac Toe </h1>
+        </header>
+        <ul id="board">
+            <li id="spot1">+</li>
+            <li id="spot2">+</li>
+            <li id="spot3">+</li>
+            <li id="spot4">+</li>
+            <li id="spot5">+</li>
+            <li id="spot6">+</li>
+            <li id="spot7">+</li>
+            <li id="spot8">+</li>
+            <li id="spot9">+</li>
+        </ul>
+        <div class="clearfix"></div>
+        <footer>
+            <button id="reset">Reset Game</button>
+        </footer>
+        </div>
     </body>
 </html>
 
-         
+
 
 
 
