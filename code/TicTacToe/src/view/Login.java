@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
-import model.Connection;
+import util.Connection;
 import ttt.james.server.TTTWebService;
 
 public class Login extends JFrame {
@@ -29,6 +29,7 @@ public class Login extends JFrame {
     private JTextField pass;
     private JTextField user;
     
+    private Login login;
     private TTTWebService proxy;
 
     /**
@@ -51,6 +52,7 @@ public class Login extends JFrame {
      * Create the frame.
     */
     public Login() {
+        login = this;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 340, 382);
         contentPane = new JPanel();
@@ -89,8 +91,8 @@ public class Login extends JFrame {
                 try {
                     Connection con = new Connection();
                     proxy = con.getProxy();
-                    int i = proxy.login(user.getText(), pass.getText());
-                    switch(i) {
+                    int result = proxy.login(user.getText(), pass.getText());
+                    switch(result) {
                         case -1:
                             JOptionPane.showMessageDialog(null,"ERROR: Unable to connect to DB");
                             break;
@@ -98,8 +100,8 @@ public class Login extends JFrame {
                             JOptionPane.showMessageDialog(null,"Incorrect Login details");
                             break;
                         default:
-                            JOptionPane.showMessageDialog(null,"Login Successfull");
-                            break;
+                            Mainmenu mainmenu = new Mainmenu(result);
+                            login.dispose();
                     }
                 }catch(Exception e){
                     System.out.println(e);

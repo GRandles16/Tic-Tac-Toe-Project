@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package util;
 
 import ttt.james.server.TTTWebService;
 import ttt.james.server.TTTWebService_Service;

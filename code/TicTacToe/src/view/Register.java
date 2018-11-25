@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
-import model.Connection;
+import util.Connection;
 import ttt.james.server.TTTWebService;
 
 public class Register extends JFrame {
