@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -32,29 +27,17 @@ public class Login extends JFrame {
     private Login login;
     private TTTWebService proxy;
 
-    /**
-     * Launch the application.
-    */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Login frame = new Login();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * Create the frame.
-    */
     public Login() {
         login = this;
+        
+        createWindow();
+    }
+    
+    public void createWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 340, 382);
+        setResizable(false);
+        setSize(340, 382);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -88,24 +71,7 @@ public class Login extends JFrame {
         JButton loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                try {
-                    Connection con = new Connection();
-                    proxy = con.getProxy();
-                    int result = proxy.login(user.getText(), pass.getText());
-                    switch(result) {
-                        case -1:
-                            JOptionPane.showMessageDialog(null,"ERROR: Unable to connect to DB");
-                            break;
-                        case 0:
-                            JOptionPane.showMessageDialog(null,"Incorrect Login details");
-                            break;
-                        default:
-                            Mainmenu mainmenu = new Mainmenu(result);
-                            login.dispose();
-                    }
-                }catch(Exception e){
-                    System.out.println(e);
-                }
+                login();
             }
         });
         loginButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -126,5 +92,27 @@ public class Login extends JFrame {
         regButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         regButton.setBounds(150, 281, 97, 25);
         contentPane.add(regButton);
+    }
+    
+    public void login() {
+        try {
+            Connection con = new Connection();
+            proxy = con.getProxy();
+            int result = proxy.login(user.getText(), pass.getText());
+            switch(result) {
+                case -1:
+                    JOptionPane.showMessageDialog(null,"ERROR: Unable to connect to DB");
+                    break;
+                case 0:
+                    JOptionPane.showMessageDialog(null,"Incorrect Login details");
+                    break;
+                default:
+                    Mainmenu mainmenu = new Mainmenu(result);
+                    login.dispose();
+                    mainmenu.setVisible(true);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
 }
