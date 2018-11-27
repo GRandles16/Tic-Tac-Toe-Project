@@ -2,6 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
 ?>
 <?php
 $uId = $_SESSION['userId'];
@@ -30,6 +31,8 @@ $client = new SoapClient($wsdl, array('trace' => 1));
 
 $params = array('uid' => $uId, 'gid' => $splitString[0]);
 
+$_SESSION['gameid'] = $splitString[0];
+
 try {
     $response = $client->joinGame($params);
     $result = $response->return;
@@ -57,7 +60,8 @@ else{
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" media="all" href="style.css"> 
-        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <div id="container">
@@ -65,6 +69,7 @@ else{
             <h1> Tic Tac Toe </h1>
         </header>
         <ul id="board">
+            
             <li id="spot1">+</li>
             <li id="spot2">+</li>
             <li id="spot3">+</li>
@@ -80,6 +85,7 @@ else{
             <button id="reset">Reset Game</button>
         </footer>
         </div>
+
     </body>
 </html>
 
