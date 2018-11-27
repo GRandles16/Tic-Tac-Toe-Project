@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
-import model.Connection;
+import util.Connection;
 import ttt.james.server.TTTWebService;
 
 public class Register extends JFrame {
@@ -32,9 +32,15 @@ public class Register extends JFrame {
      * Create the frame.
      */
     public Register() {
+        createWindow();
+    }
+    
+    public void createWindow() {
         
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 366, 751);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setSize(350, 560);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -48,83 +54,63 @@ public class Register extends JFrame {
 
         JLabel lblUsername = new JLabel("Enter Username:");
         lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblUsername.setBounds(12, 50, 143, 26);
+        lblUsername.setBounds(25, 60, 150, 25);
         contentPane.add(lblUsername);
 
         username = new JTextField();
-        username.setBounds(12, 80, 298, 35);
+        username.setBounds(25, 90, 300, 35);
         contentPane.add(username);
         username.setColumns(10);
 
         JLabel lblFirstName = new JLabel("Enter First Name:");
         lblFirstName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblFirstName.setBounds(12, 130, 143, 26);
+        lblFirstName.setBounds(25, 140, 150, 25);
         contentPane.add(lblFirstName);
 
         firstName = new JTextField();
-        firstName.setBounds(12, 160, 298, 35);
+        firstName.setBounds(25, 170, 300, 35);
         contentPane.add(firstName);
         firstName.setColumns(10);
 
         JLabel lblSurame = new JLabel("Enter Surame:");
         lblSurame.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblSurame.setBounds(12, 210, 143, 26);
+        lblSurame.setBounds(25, 220, 150, 25);
         contentPane.add(lblSurame);
         
         surname = new JTextField();
-        surname.setBounds(12, 240, 298, 35);
+        surname.setBounds(25, 250, 300, 35);
         contentPane.add(surname);
         surname.setColumns(10);
         
         JLabel lblPassword1 = new JLabel("Enter Password:");
         lblPassword1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblPassword1.setBounds(12, 290, 143, 26);
+        lblPassword1.setBounds(25, 300, 150, 25);
         contentPane.add(lblPassword1);
 
         password1 = new JPasswordField();
         password1.setColumns(10);
         contentPane.add(password1);
-        password1.setBounds(12, 320, 298, 35);
+        password1.setBounds(25, 330, 300, 35);
         
         JLabel lblPassword2 = new JLabel("Re-Enter Password:");
         lblPassword2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblPassword2.setBounds(12, 370, 143, 26);
+        lblPassword2.setBounds(25, 380, 150, 25);
         contentPane.add(lblPassword2);
 
         password2 = new JPasswordField();
         password2.setColumns(10);
-        password2.setBounds(12, 400, 298, 35);
+        password2.setBounds(25, 410, 300, 35);
         contentPane.add(password2);
 
 
         JButton btnRegister = new JButton("Register");
         btnRegister.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(password1.getText().equals(password2.getText())) {
-                    Connection con = new Connection();
-                    proxy = con.getProxy();
-                    String result = proxy.register(username.getText(), password1.getText(), firstName.getText(), surname.getText());
-                    switch(result) {
-                        case "ERROR-REPEAT":
-                            JOptionPane.showMessageDialog(null,"ERROR: Username used");
-                            break;
-                        case "ERROR-INSERT":
-                            JOptionPane.showMessageDialog(null,"ERROR: Unable to add data");
-                            break;
-                        case "ERROR-RETRIEVE":
-                            JOptionPane.showMessageDialog(null,"ERROR: Unable to retrieve data");
-                            break;
-                        case "ERROR-DB":
-                            JOptionPane.showMessageDialog(null,"ERROR: Unable to connect to DB");
-                            break;
-                        default:
-                            dispose();
-                    }
-                } else JOptionPane.showMessageDialog(null,"Error: Passwords do no match");
+                registerUser();
             }
         });
         btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        btnRegister.setBounds(50, 450, 97, 25);
+        btnRegister.setBounds(50, 450, 100, 25);
         contentPane.add(btnRegister);
         
         JButton btnCancel = new JButton("Cancel");
@@ -134,7 +120,31 @@ public class Register extends JFrame {
             }
         });
         btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        btnCancel.setBounds(150, 450, 97, 25);
+        btnCancel.setBounds(150, 450, 100, 25);
         contentPane.add(btnCancel);
+    }
+    
+    public void registerUser() {
+        if(password1.getText().equals(password2.getText())) {
+            Connection con = new Connection();
+            proxy = con.getProxy();
+            String result = proxy.register(username.getText(), password1.getText(), firstName.getText(), surname.getText());
+            switch(result) {
+                case "ERROR-REPEAT":
+                    JOptionPane.showMessageDialog(null,"ERROR: Username used");
+                    break;
+                case "ERROR-INSERT":
+                    JOptionPane.showMessageDialog(null,"ERROR: Unable to add data");
+                    break;
+                case "ERROR-RETRIEVE":
+                    JOptionPane.showMessageDialog(null,"ERROR: Unable to retrieve data");
+                    break;
+                case "ERROR-DB":
+                    JOptionPane.showMessageDialog(null,"ERROR: Unable to connect to DB");
+                    break;
+                default:
+                    dispose();
+            }
+        } else JOptionPane.showMessageDialog(null,"Error: Passwords do no match");
     }
 }
