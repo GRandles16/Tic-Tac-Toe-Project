@@ -1,13 +1,14 @@
 <?php
 ////////////////////////////////////RESUME GAME////////////////////////////////////////
+include 'Soap.php';
 if (!isset($_SESSION)) {
     session_start();
 }
 
-  $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-  $client = new SoapClient($wsdl, array('trace'=>1));
+//$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
+//$client = new SoapClient($wsdl, array('trace'=>1));
 $uId = $_SESSION['userId'];
-  
+
 $s_array1 = explode(",", $_POST['data5']);
 
 $spaces1 = array(); //to store space
@@ -43,17 +44,15 @@ try {
 }
 ?>
 <?php
-if($result1 == 1)
-{
+if ($result1 == 1) {
     echo "<script>";
     echo"alert('You have sucessfully resumed the game, good luck!');";
     echo "</script>";
-}
-else{
+} else {
     echo "<script>";
     echo "alert('You have unsucessfully resumed the game');";
     echo "</script>";
-    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,56 +60,54 @@ else{
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" media="all" href="style.css"> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
         <div id="container">
-        <header>
-            <h1> Tic Tac Toe </h1>
-        </header>
-        <ul id="board">
-            
-            <li id="spot1">+</li>
-            <li id="spot2">+</li>
-            <li id="spot3">+</li>
-            <li id="spot4">+</li>
-            <li id="spot5">+</li>
-            <li id="spot6">+</li>
-            <li id="spot7">+</li>
-            <li id="spot8">+</li>
-            <li id="spot9">+</li>
-        </ul>
-        <div class="clearfix"></div>
-        <footer>
+            <header>
+                <h1> Tic Tac Toe </h1>
+            </header>
+            <ul id="board">
 
-        </footer>
+                <li id="spot1">+</li>
+                <li id="spot2">+</li>
+                <li id="spot3">+</li>
+                <li id="spot4">+</li>
+                <li id="spot5">+</li>
+                <li id="spot6">+</li>
+                <li id="spot7">+</li>
+                <li id="spot8">+</li>
+                <li id="spot9">+</li>
+            </ul>
+            <div class="clearfix"></div>
+            <footer>
+
+            </footer>
         </div>
-                                <?php
-                        if (!isset($_SESSION)) {
-                                session_start();
-                            }
-                        
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $params6 = array('gid' => $_SESSION['gameid']);
-                                            try {
-                                                $response4 = $client->getBoard($params6);
-                                                $result4 = $response4->return;
-                                                ?>
+try {
+    $response4 = $client->getBoard($params6);
+    $result4 = $response4->return;
+    ?>
             <table>
                 <tr>
                     <td><h1>MOVES SO FAR</h1></td>
                     <td><?php echo $result4; ?></td>
                 </tr>
             </table> 
-                                                
-                                                
-                                                <?php
-                                            }
-                                            catch (Exception $e) 
-                                                {
-                                                    echo "<h2>Exception Error!</h2>";
-                                                    echo $e->getMessage();
-                                                }
-                ?> 
+
+
+    <?php
+} catch (Exception $e) {
+    echo "<h2>Exception Error!</h2>";
+    echo $e->getMessage();
+}
+?> 
 
     </body>
 </html>    

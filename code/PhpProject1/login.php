@@ -1,12 +1,9 @@
 <?php
-
+include 'Soap.php';
 if(!isset($_SESSION)) 
 { 
     session_start(); 
 } 
-
-  $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-  $client = new SoapClient($wsdl, array('trace'=>1));
   
   
 $username = $_POST['username'];

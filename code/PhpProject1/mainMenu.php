@@ -1,9 +1,9 @@
 
 <?php
-
-  $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-$trace = true;
- $client = new SoapClient($wsdl, array('trace' => $trace));
+include 'Soap.php';
+ // $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
+//$trace = true;
+ //$client = new SoapClient($wsdl, array('trace' => $trace));
  
  
 if(!isset($_SESSION)) 

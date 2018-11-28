@@ -1,13 +1,14 @@
 <?php
+include 'Soap.php';
 if (!isset($_SESSION)) {
     session_start();
 }
 ?>
 <!-- ///////////////////////////////showMyOpenGames////////////////////////////////////////////////-->
 <?php
-$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-$trace = true;
-$client = new SoapClient($wsdl, array('trace' => $trace));
+//$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
+//$trace = true;
+//$client = new SoapClient($wsdl, array('trace' => $trace));
 
 $uId = $_SESSION['userId'];
 $GId = $_SESSION['data'];

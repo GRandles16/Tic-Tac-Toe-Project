@@ -1,4 +1,5 @@
 <?php
+include 'Soap.php';
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -25,8 +26,8 @@ for ($i = 0; $i < $count; $i++) {
 //print_r($splitString[0]);
 //print_r($splitString[1]);
 
-$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
-$client = new SoapClient($wsdl, array('trace' => 1));
+//$wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
+//$client = new SoapClient($wsdl, array('trace' => 1));
 
 $params = array('uid' => $uId, 'gid' => $splitString[0]);
 
@@ -82,26 +83,35 @@ if ($result == 1) {
             </ul>
             <div class="clearfix"></div>
             <footer>
+            </footer>
+        </div>
 <?php
 if (!isset($_SESSION)) {
     session_start();
 }
+
 $params6 = array('gid' => $_SESSION['gameid']);
 try {
     $response4 = $client->getBoard($params6);
     $result4 = $response4->return;
-    echo $result4;
+    ?>
+            <table>
+                <tr>
+                    <td><h1>MOVES SO FAR</h1></td>
+                    <td><?php echo $result4; ?></td>
+                </tr>
+            </table> 
+
+
+    <?php
 } catch (Exception $e) {
     echo "<h2>Exception Error!</h2>";
     echo $e->getMessage();
 }
-?>                                
-            </footer>
-        </div>
+?> 
 
     </body>
-</html>
-
+</html> 
 
 
 
