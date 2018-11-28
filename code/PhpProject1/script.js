@@ -66,6 +66,8 @@
                 var gid = "56";
                 var method = "submit";
                 
+                
+                
                 if($isItClicked1 == 0)
                 {
                    $('#spot1').text("x"); 
