@@ -38,6 +38,8 @@ public class MyStats extends JFrame {
         createWindow();
     }
     
+    //Window shows current users stats
+    
     public void createWindow() {
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -96,6 +98,8 @@ public class MyStats extends JFrame {
         contentPane.add(btnClose);
     }
     
+    //Method looks at all games and calculates stats
+    
     public void calculateStats() {
         getLeagueTable();
         
@@ -104,7 +108,6 @@ public class MyStats extends JFrame {
         String[] results = leagueTable.split("\n");
         
         for (String result : results) {
-            JOptionPane.showMessageDialog(null,result);
             String[] game = result.split(",");
             status = Integer.parseInt(game[3]);
             
@@ -150,6 +153,8 @@ public class MyStats extends JFrame {
         draws = "Draws:\t" + drawCount;
         loses = "Loses:\t" + lossCount;
     }
+    
+    //gets league table stats
     
     public void getLeagueTable() {
         try {

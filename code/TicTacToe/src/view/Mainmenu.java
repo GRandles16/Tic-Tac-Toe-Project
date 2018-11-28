@@ -37,6 +37,8 @@ public class Mainmenu extends JFrame {
         createWindow();
     }
     
+    //Creats Window with buttons
+    
     public void createWindow() {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setResizable(false);

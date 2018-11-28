@@ -4,6 +4,8 @@ package util;
 import ttt.james.server.TTTWebService;
 import ttt.james.server.TTTWebService_Service;
 
+//Used to connect to Web Service and reduce reused code
+
 public class Connection {
     
     private static TTTWebService proxy;

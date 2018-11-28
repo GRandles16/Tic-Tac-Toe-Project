@@ -36,6 +36,8 @@ public class Register extends JFrame {
         createWindow();
     }
     
+    //Window used to register user
+    
     public void createWindow() {
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -124,6 +126,8 @@ public class Register extends JFrame {
         btnCancel.setBounds(150, 450, 100, 25);
         contentPane.add(btnCancel);
     }
+    
+    //Method user to send data to Webservice to register a user
     
     public void registerUser() {
         if(password1.getText().equals(password2.getText())) {

@@ -32,6 +32,8 @@ public class Start extends JFrame {
         createWindow();
     }
     
+    //Window Contains 2 buttons
+    
     public void createWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
