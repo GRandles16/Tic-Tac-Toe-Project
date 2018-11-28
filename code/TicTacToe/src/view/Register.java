@@ -28,9 +28,10 @@ public class Register extends JFrame {
     
     private TTTWebService proxy;
 
-    /**
-     * Create the frame.
-     */
+    private final int paneWidth = 350;
+    private final int paneHeight = 560;
+    private final String title = "Register Page";
+
     public Register() {
         createWindow();
     }
@@ -39,14 +40,14 @@ public class Register extends JFrame {
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setSize(350, 560);
+        setSize(paneWidth, paneHeight);
         setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblRegisterPage = new JLabel("Register Page");
+        JLabel lblRegisterPage = new JLabel(title);
         lblRegisterPage.setHorizontalAlignment(SwingConstants.CENTER);
         lblRegisterPage.setFont(new Font("Tahoma", Font.PLAIN, 26));
         lblRegisterPage.setBounds(12, 13, 298, 51);
