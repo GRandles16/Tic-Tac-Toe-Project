@@ -21,21 +21,25 @@ public class Mainmenu extends JFrame {
     private JPanel contentPane;
     private final int paneWidth = 400;
     private final int paneHeight = 400;
+    private final String title = "Main Menu";
     private int userID;
+    private String username;
     
     private Login login;
     private Mainmenu mainmenu;
     private TTTWebService proxy;
     
-    public Mainmenu(int uID) {
+    public Mainmenu(int uID, String name) {
         userID = uID;
+        username = name;
         mainmenu = this;
         
         createWindow();
     }
     
+    //Creats Window with buttons
+    
     public void createWindow() {
-        
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setSize(paneWidth, paneHeight);
@@ -45,11 +49,11 @@ public class Mainmenu extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JLabel lblLoginPage = new JLabel("Main Menu");
-        lblLoginPage.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLoginPage.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        lblLoginPage.setBounds(50, 10, 300, 50);
-        contentPane.add(lblLoginPage);
+        JLabel lblTitle = new JLabel(title);
+        lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        lblTitle.setBounds(50, 10, 300, 50);
+        contentPane.add(lblTitle);
         
         JButton newGame = new JButton("New Game");
         newGame.addActionListener(new ActionListener() {
@@ -83,6 +87,16 @@ public class Mainmenu extends JFrame {
         openGames.setBounds(125, 130, 150, 25);
         contentPane.add(openGames);
         
+        JButton myStats = new JButton("My Stats");
+        myStats.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                showMyStats();
+            }
+        });
+        myStats.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        myStats.setBounds(125, 160, 150, 25);
+        contentPane.add(myStats);
+        
         JButton leagueTable = new JButton("League Table");
         leagueTable.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -90,7 +104,7 @@ public class Mainmenu extends JFrame {
             }
         });
         leagueTable.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        leagueTable.setBounds(125, 160, 150, 25);
+        leagueTable.setBounds(125, 190, 150, 25);
         contentPane.add(leagueTable);
         
         JButton logoutButtom = new JButton("Logout");
@@ -100,7 +114,7 @@ public class Mainmenu extends JFrame {
             }
         });
         logoutButtom.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        logoutButtom.setBounds(125, 190, 150, 25);
+        logoutButtom.setBounds(125, 220, 150, 25);
         contentPane.add(logoutButtom);
     }
     
@@ -131,24 +145,32 @@ public class Mainmenu extends JFrame {
     }
     
     public void showMyGames() {
-        MyGames myGames = new MyGames();
-        myGames.setVisible(true);
+        JOptionPane.showMessageDialog(null,"My Games");
+//        MyGames myGames = new MyGames();
+//        myGames.setVisible(true);
     }
     
     public void showOpenGames() {
-        OpenGames openGames = new OpenGames();
-        openGames.setVisible(true);
+        JOptionPane.showMessageDialog(null,"Open Games");
+//        OpenGames openGames = new OpenGames();
+//        openGames.setVisible(true);
     }
     
+    public void showMyStats() {
+        MyStats myStats = new MyStats(userID, username);
+        myStats.setVisible(true);
+    } 
+    
     public void showLeagueTable() {
-        LeagueTable leagueTable = new LeagueTable();
-        leagueTable.setVisible(true);
+        JOptionPane.showMessageDialog(null,"League Table");
+//        LeagueTable leagueTable = new LeagueTable();
+//        leagueTable.setVisible(true);
     }
     
     public void logout() {
-        Login login = new Login(); 
+        Start start = new Start(); 
         mainmenu.dispose();
-        login.setVisible(true);
+        start.setVisible(true);
     }
    
 }

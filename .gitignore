@@ -6,3 +6,5 @@
 /code/PhpProject1/nbproject/private/
 /code/TicTacToe/nbproject/private/
 *.properties
+*.properties
+code/TicTacToe/nbproject/private/private.xml

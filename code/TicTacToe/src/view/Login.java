@@ -1,26 +1,28 @@
 
 package view;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import util.Connection;
 import ttt.james.server.TTTWebService;
 
 public class Login extends JFrame {
-
+    
     private JPanel contentPane;
+    private final int paneWidth = 340;
+    private final int paneHeight = 380;
+    private final String title = "Login Page";
     private JTextField pass;
     private JTextField user;
     
@@ -36,14 +38,14 @@ public class Login extends JFrame {
     public void createWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setSize(340, 382);
+        setSize(paneWidth, paneHeight);
         setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 	
-        JLabel lblLoginPage = new JLabel("Login Page");
+        JLabel lblLoginPage = new JLabel(title);
         lblLoginPage.setHorizontalAlignment(SwingConstants.CENTER);
         lblLoginPage.setFont(new Font("Tahoma", Font.PLAIN, 26));
         lblLoginPage.setBounds(12, 13, 298, 51);
@@ -107,7 +109,7 @@ public class Login extends JFrame {
                     JOptionPane.showMessageDialog(null,"Incorrect Login details");
                     break;
                 default:
-                    Mainmenu mainmenu = new Mainmenu(result);
+                    Mainmenu mainmenu = new Mainmenu(result,user.getText());
                     login.dispose();
                     mainmenu.setVisible(true);
             }
