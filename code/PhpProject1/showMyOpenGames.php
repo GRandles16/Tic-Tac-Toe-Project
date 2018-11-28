@@ -9,7 +9,7 @@ $wsdl = "http://localhost:8080/TTTWebApplication/TTTWebService?wsdl";
 $trace = true;
 $client = new SoapClient($wsdl, array('trace' => $trace));
 
-
+$uId = $_SESSION['userId'];
 $GId = $_SESSION['data'];
 $s_array = explode(".", $GId);
 
@@ -55,28 +55,66 @@ try {
     echo $e->getMessage();
 }
 
-$s_array = explode(".", $data);
+$s_array1 = explode(".", $data);
 
-$spaces = array(); //to store space
-$allGames = array();
-foreach ($s_array as $word) {
+$spaces1 = array(); //to store space
+$allGames1 = array();
+foreach ($s_array1 as $word) {
     $endsWith = substr($word, -1);
     $startsWith = substr($word, 0, 1);
         if ($startsWith == '0') {
             $word = ltrim($word, '0');
-            array_push($allGames, $word);
+            array_push($allGames1, $word);
         }
 
         else if ($word) {
-            array_push($allGames, $word);
+            array_push($allGames1, $word);
         }
 }
 
-$count = count($others);
+$count1 = count($others);
 
-for ($i = 0; $i < $count; $i++) {
-    for ($j = 0; $j < $count; $j++) {
-        $result[$i][$j + 1] = $allGames[$i];
+for ($i = 0; $i < $count1; $i++) {
+    for ($j = 0; $j < $count1; $j++) {
+        $result[$i][$j + 1] = $allGames1[$i];
+    }
+   // print_r ($allGames1[$i]) ;
+}
+/////////////////////////////////retrieve all games user has played/playing/////////////////////////////////////////////
+try {
+    $params = array('uid'=>$uId);
+    $response5 = $client->showAllMyGames($params);
+    $data5 = $response5->return;
+    echo $data5;
+    echo $uId;
+
+} catch (Exception $e) {
+    echo "<h2>Exception Error!</h2>";
+    echo $e->getMessage();
+}
+
+$s_array5 = explode(".", $data5);
+
+$spaces5 = array(); //to store space
+$resumeGames = array();
+foreach ($s_array5 as $word) {
+    $endsWith = substr($word, -1);
+    $startsWith = substr($word, 0, 1);
+        if ($startsWith == '0') {
+            $word = ltrim($word, '0');
+            array_push($resumeGames, $word);
+        }
+
+        else if ($word) {
+            array_push($resumeGames, $word);
+        }
+}
+
+$count5 = count($others);
+
+for ($i = 0; $i < $count5; $i++) {
+    for ($j = 0; $j < $count5; $j++) {
+        $result1[$i][$j + 1] = $resumeGames[$i];
     }
 }
 ?>
@@ -88,7 +126,7 @@ for ($i = 0; $i < $count; $i++) {
     </head>
     
     <body>
-        <h1 style="color: red;">Displaying My Open Games</h1>
+        <h1 style="color: red;">Displaying My Open Games That 2nd player has not joined</h1>
         <form>
             <select name = "others" id="array">
                     <?php
@@ -100,11 +138,11 @@ for ($i = 0; $i < $count; $i++) {
             <input type="submit" value="Resume">
 
         </form>
-        <h1 style="color: red;">Showing All Open Games</h1>
+        <h1 style="color: red;">Showing All Open Games (list of games awaiting 2nd player)</h1>
             <form action="mainGame.php" method="post">
                 <select name = "data" id="array">
                     <?php
-                        foreach ($allGames as $value) {
+                        foreach ($allGames1 as $value) {
                             printf('<option>%s</option>option>', $value);
                         }
                     ?>    
@@ -112,6 +150,18 @@ for ($i = 0; $i < $count; $i++) {
                 <input type="submit" value="Join">
 
             </form>
+         <h1 style="color: red;">Showing All games user has played/playing</h1>
+         <form action="showAllMyGames.php" method="post">
+                <select name = "data5" id="array">
+                    <?php
+                        foreach ($resumeGames as $value) {
+                            printf('<option>%s</option>option>', $value);
+                        }
+                    ?>    
+                </select>  
+                <input type="submit" value="Re-Join">
+
+            </form> 
     </body>
 </html>
 

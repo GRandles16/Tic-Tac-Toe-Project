@@ -23,16 +23,20 @@ if(!isset($_SESSION))
                 <tr>
                     <td>
                     <td><input onclick="myFunction()" type="submit" name="New-Game" value="newGame" /></td><br>
-                    <td><input type="submit" name="League-Table" value="leagueTable" /></td><br>
+                
                     <td><input type="submit" name="Show-My-Open-Games" value="showMyOpenGames" /></td><br>
                              
                         
                         
-                    </td>
-                </tr>
 
-            </table> 
         </form> 
+        <form action="leaderboard.php">
+            <td><input type="submit" name="League-Table" value="leagueTable" /></td>
+        </form>
+                            </td>
+                </tr>
+            </table> 
+        
 <script>
 function myFunction()
 {

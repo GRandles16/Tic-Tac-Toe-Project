@@ -52,6 +52,7 @@ else if($_REQUEST['Show-My-Open-Games']=="showMyOpenGames")
         
          
          $GId = $response->return;
+         echo $Gid;
          $_SESSION['data'] = $GId;
          header("Location: showMyOpenGames.php");
      
